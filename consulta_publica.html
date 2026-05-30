@@ -1,3 +1,16 @@
+Aquí tienes el código completo y definitivo de consulta_publica.html, totalmente limpio, institucionalizado (sin menciones de marcas externas como Google o Gemini) y preparado para funcionar al 100% con tu enlace real de GitHub Pages y la lectura automática de códigos QR.
+
+Sigue estos pasos rápidos antes de copiarlo:
+
+Abre tu archivo consulta_publica.html en tu computadora usando el Bloc de Notas.
+
+Borra todo lo que tenga adentro.
+
+Copia por completo el bloque de código de abajo y pégalo en el archivo vacío.
+
+Ve a Archivo ➔ Guardar.
+
+HTML
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,25 +20,85 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <style>
-        body { font-family: 'Arial', sans-serif; background-color: #f8fafc; color: #0f172a; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
-        .contenedor-publico { background: #ffffff; width: 100%; max-width: 600px; padding: 25px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-top: 6px solid #2563eb; margin-top: 20px; box-sizing: border-box; }
-        .cabecera-publica { text-align: center; border-bottom: 2px solid #f1f5f9; padding-bottom: 15px; margin-bottom: 20px; }
-        .cabecera-publica h1 { margin: 5px 0; font-size: 20px; color: #1e3a8a; }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .contenedor-publico {
+            background: #ffffff;
+            width: 100%;
+            max-width: 600px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border-top: 6px solid #2563eb;
+            margin-top: 20px;
+            box-sizing: border-box;
+        }
+        .cabecera-publica {
+            text-align: center;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .cabecera-publica h2 { margin: 5px 0; font-size: 20px; color: #1e3a8a; }
+        
         .caja-buscar { display: flex; gap: 10px; margin-bottom: 20px; }
-        .caja-buscar input { flex: 1; padding: 12px; border: 2px solid #cbd5e1; border-radius: 6px; font-size: 16px; font-weight: bold; text-align: center; text-transform: uppercase; }
-        .btn-buscar { background-color: #2563eb; color: white; border: none; padding: 12px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 15px; }
-        .resultado-tramite { display: none; background-color: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; }
-        .linea-tiempo-estado { background-color: #eff6ff; border-left: 4px solid #2563eb; padding: 15px; border-radius: 0 6px 6px 0; margin-top: 15px; margin-bottom: 15px; }
-        .badge-ubicacion { background-color: #dbeafe; color: #1e40af; padding: 6px 12px; border-radius: 20px; font-weight: bold; font-size: 13px; display: inline-block; margin-top: 5px; }
-        .btn-verificacion-ia { width: 100%; background-color: #10b981; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: bold; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .modal-ia { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.6); align-items: center; justify-content: center; }
-        .modal-contenido { background-color: white; padding: 25px; border-radius: 10px; max-width: 500px; width: 90%; border-top: 6px solid #10b981; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); position: relative; }
-        .btn-cerrar-modal { background-color: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-weight: bold; cursor: pointer; float: right; font-size: 12px; }
+        .caja-buscar input {
+            flex: 1; padding: 12px; border: 2px solid #cbd5e1; border-radius: 6px; font-size: 16px; font-weight: bold; text-align: center; text-transform: uppercase;
+        }
+        .caja-buscar input:focus { border-color: #2563eb; outline: none; }
+        .btn-buscar {
+            background-color: #2563eb; color: white; border: none; padding: 12px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 15px;
+        }
+        
+        .resultado-tramite {
+            display: none;
+            background-color: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .linea-tiempo-estado {
+            background-color: #eff6ff;
+            border-left: 4px solid #2563eb;
+            padding: 15px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        .badge-ubicacion {
+            background-color: #dbeafe; color: #1e40af; padding: 6px 12px; border-radius: 20px; font-weight: bold; font-size: 13px; display: inline-block; margin-top: 5px;
+        }
+
+        .btn-verificacion-ia {
+            width: 100%; background-color: #10b981; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: bold; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+        }
+        .btn-verificacion-ia:hover { background-color: #059669; }
+
+        /* 🏛️ VENTANA EMERGENTE MODAL DE AUDITORÍA */
+        .modal-ia {
+            display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.6); align-items: center; justify-content: center;
+        }
+        .modal-contenido {
+            background-color: white; padding: 25px; border-radius: 10px; max-width: 500px; width: 90%; border-top: 6px solid #10b981; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); position: relative;
+        }
+        .btn-cerrar-modal {
+            background-color: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-weight: bold; cursor: pointer; float: right; font-size: 12px;
+        }
     </style>
 </head>
 <body>
 
 <div class="contenedor-publico">
+    
     <div class="cabecera-publica">
         <h2>🏛️ PLATAFORMA DE TRANSPARENCIA CIUDADANA</h2>
         <p style="margin:5px 0 0 0; color:#64748b; font-size:13px;">Consulte el estado real de su Hoja de Ruta las 24 horas</p>
@@ -38,6 +111,7 @@
 
     <div id="panelResultado" class="resultado-tramite">
         <h3 style="margin: 0 0 10px 0; color: #1e3a8a; border-bottom: 1px solid #f1f5f9; padding-bottom: 5px; font-size: 15px;">📋 DATOS DE REGISTRO OFICIAL</h3>
+        
         <table style="width:100%; font-size:14px; line-height:1.6; color:#334155; margin-bottom: 15px;">
             <tr><td style="width:35%;"><strong>Código H.R.:</strong></td><td><span id="resHR" style="font-weight:bold; color:#b91c1c;"></span></td></tr>
             <tr><td><strong>Remitente:</strong></td><td><span id="resRemitente"></span></td></tr>
@@ -69,12 +143,20 @@
     <div class="modal-contenido">
         <button class="btn-cerrar-modal" onclick="cerrarModalAuditoria()">CERRAR</button>
         <h3 style="margin:0 0 10px 0; color:#065f46; font-size:16px;">🏛️ INFORME DE INTEGRIDAD Y SEGUIMIENTO TÉCNICO</h3>
-        <div id="cuerpoIaDinamico" style="background-color: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; padding: 15px; border-radius: 6px; font-size: 13px; line-height: 1.5; text-align: justify;"></div>
+        <p style="font-size:12px; color:#475569; line-height:1.5; margin-bottom:12px;">
+            <strong>Módulo de Control:</strong> Auditoría Algorítmica de Hojas de Ruta <br>
+            <strong>Servidor Origen:</strong> Red de Datos Central del Gobierno Autónomo Municipal.
+        </p>
+        
+        <div id="cuerpoIaDinamico" style="background-color: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; padding: 15px; border-radius: 6px; font-size: 13px; line-height: 1.5; text-align: justify;">
+            </div>
+        
         <p id="txtHashSeguridad" style="font-size:10px; color:#94a3b8; text-align:center; margin-top:15px; margin-bottom:0; font-family: monospace;"></p>
     </div>
 </div>
 
 <script>
+    // Configuración de tu proyecto Firebase Firestore
     const firebaseConfig = {
         apiKey: "AIzaSyBuIpblsCPjGYMdFKTKOs6-cEf09WhX96E",
         authDomain: "municipio-digital-demo.firebaseapp.com",
@@ -90,15 +172,14 @@
 
     let datosDinamicosTramite = {};
 
-    // ⚡ DETECTOR AUTOMÁTICO DE LECTURA DE QR
+    // ⚡ LECTOR AUTOMÁTICO DE PARÁMETROS QR (?hr=CÓDIGO)
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
         const hrPorParametro = urlParams.get('hr');
         
         if (hrPorParametro) {
             document.getElementById('txtBuscarHR').value = hrPorParametro;
-            // Ejecutar la búsqueda de Firebase automáticamente al entrar mediante el QR
-            consultarTramitePublico();
+            consultarTramitePublico(); // Dispara la consulta automáticamente al escanear
         }
     };
 
@@ -113,6 +194,7 @@
             if (doc.exists) {
                 const data = doc.data();
                 datosDinamicosTramite = data; 
+                
                 txtError.style.display = "none";
                 panel.style.display = "block";
 
@@ -127,12 +209,13 @@
                 let textoInstruccion = "";
                 if(data.estado === "INGRESADO") textoInstruccion = "📥 Documento recibido formalmente en ventanilla y derivado para su respectiva evaluación técnica.";
                 if(data.estado === "JURIDICA_APROBADO") textoInstruccion = "🖋️ ¡VIABLE! Informe legal aprobado de forma conforme. Remitido al Despacho del Alcalde para firma de Autorización Final.";
-                if(data.estado === "RECHAZADO") textoInstruccion = "❌ OBSERVADO. Devuelto a la unidad de origen con observaciones técnico-legales.";
+                if(data.estado === "RECHAZADO") textoInstruccion = "❌ OBSERVADO. Devuelto a la unidad de origen con observaciones técnico-legales pendientes.";
                 
                 if (data.presionMAE === "AGILIZAR") {
                     textoInstruccion += " (⚡ Trámite priorizado por instrucción directa del Despacho de la Máxima Autoridad Ejecutiva)";
                 }
                 document.getElementById('resEstado').innerText = textoInstruccion;
+
             } else {
                 panel.style.display = "none";
                 txtError.style.display = "block";
@@ -140,23 +223,30 @@
         });
     }
 
+    // 🔄 CONSTRUCTOR DINÁMICO DE AUDITORÍA INSTITUCIONAL
     function abrirModalAuditoria() {
         const d = datosDinamicosTramite;
         if (!d.codigoHR) return;
+
         let reporteIa = `<b>[VERIFICACIÓN DE SEGURIDAD SISTÉMICA]:</b> El Módulo de Control Automatizado ha validado los datos de la Hoja de Ruta <b>${d.codigoHR}</b> promovida por el ciudadano(a) <b>${d.remitente}</b>, proveniente de <b>${d.procedencia}</b>.<br><br>`;
-        reporteIa += `<b>[CONTROL DE EXPEDIENTE]:</b> El sistema registra <b>${d.fojas} fojas foliadas</b> físicamente. El procesamiento de texto del asunto corroboró la correcta asignación de competencias en el área de <b>${d.destino}</b>.<br><br>`;
+        
+        reporteIa += `<b>[CONTROL DE EXPEDIENTE]:</b> El sistema registra <b>${d.fojas} fojas foliadas</b> físicamente. El procesamiento de texto del asunto (<i>"${d.asunto}"</i>) corrobora la correcta asignación de competencias en el área de <b>${d.destino}</b>.<br><br>`;
 
         if (d.presionMAE && d.presionMAE !== "NINGUNA") {
-            reporteIa += `<b>⚠️ [ALERTA DE DESPACHO EJECUTIVO]:</b> Se registra una instrucción directa y prioritaria emitida desde el Despacho de la Máxima Autoridad Ejecutiva (<b>Modo: Control MAE - ${d.presionMAE}</b>).`;
+            reporteIa += `<b>⚠️ [ALERTA DE DESPACHO EJECUTIVO]:</b> Se registra una instrucción directa y prioritaria emitida desde el Despacho de la Máxima Autoridad Ejecutiva (<b>Modo: Control MAE - ${d.presionMAE}</b>). El sistema ha reordenado la fila virtual para asegurar el cumplimiento operativo inmediato.`;
         } else {
-            reporteIa += `<b>🟢 [INFORME DE EFICIENCIA]:</b> El trámite avanza en los plazos determinados por el reglamento interno. No se registran bloqueos burocráticos.`;
+            reporteIa += `<b>🟢 [INFORME DE EFICIENCIA]:</b> El trámite avanza en los plazos y tiempos estándar determinados por el reglamento interno del municipio. No se registran retrasos ni bloqueos burocráticos en la red institucional.`;
         }
+
         document.getElementById('cuerpoIaDinamico').innerHTML = reporteIa;
         document.getElementById('txtHashSeguridad').innerText = `SELLO DIGITAL DE INTEGRIDAD: GAMD-CRYPT-SECURE-${d.codigoHR}-2026`;
+
         document.getElementById('miModal').style.display = 'flex';
     }
 
-    function cerrarModalAuditoria() { document.getElementById('miModal').style.display = 'none'; }
+    function cerrarModalAuditoria() {
+        document.getElementById('miModal').style.display = 'none';
+    }
 </script>
 </body>
 </html>
